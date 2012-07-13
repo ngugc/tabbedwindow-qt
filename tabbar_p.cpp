@@ -53,6 +53,14 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 
+void TabBarPrivate::tabRemoved(int index)
+{
+    if (count() == 0) {
+        window()->close();
+    }
+}
+
+
 void TabBarPrivate::createNewWindow(int index)
 {
     // Retrieve references

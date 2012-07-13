@@ -15,6 +15,7 @@ public:
 
 protected:
     void createNewWindow(int index);
+    void tabRemoved(int index);
     
 signals:
     
