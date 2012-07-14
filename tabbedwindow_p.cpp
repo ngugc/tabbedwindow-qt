@@ -1,6 +1,4 @@
 #include "tabbedwindow_p.h"
-#include "tabview_p.h"
-#include "tabbar_p.h"
 
 
 TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)

@@ -1,4 +1,3 @@
-#include "tabbedwindow.h"
 #include "tabbedwindow_p.h"
 
 

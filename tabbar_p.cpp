@@ -1,6 +1,7 @@
-#include "QtGui"
+#include <QMouseEvent>
+#include <QApplication>
+
 #include "tabbar_p.h"
-#include "tabbedwindow.h"
 #include "tabview_p.h"
 
 
@@ -21,7 +22,6 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
     // If left button is pressed save current mouse position for
     // possible draggin action triggered in the future
     if (event->button() == Qt::LeftButton) {
-        qDebug() << "left button pressed at" << event->globalPos();
         moveEvent = new TabMoveEvent(DRAG, tabAt(event->pos()),
                                      event->globalPos());
     }
@@ -54,8 +54,6 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
         TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
                     QApplication::widgetAt(event->globalPos()));
 
-        qDebug() << "stop dragging tab" << "on widget" << w;
-
         // Choose action by the widget under the mouse's coordinates
         if (w == NULL) {
             // Creates a new window with the dragged tab
@@ -67,8 +65,6 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 
             if (wnd != NULL) {
                 moveToWindow(wnd, event->globalPos(), moveEvent);
-            } else {
-                qDebug() << "TabBarPrivate not inside a TabbedWindow!!!";
             }
         }
 

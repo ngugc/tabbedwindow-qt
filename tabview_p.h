@@ -3,6 +3,7 @@
 
 #include <QTabWidget>
 
+
 class TabViewPrivate : public QTabWidget
 {
     Q_OBJECT

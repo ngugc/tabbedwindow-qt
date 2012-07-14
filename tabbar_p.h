@@ -1,7 +1,7 @@
 #ifndef VIEWBAR_P_H
 #define VIEWBAR_P_H
 
-#include <QtGui>
+#include <QTabBar>
 #include "tabbedwindow.h"
 
 

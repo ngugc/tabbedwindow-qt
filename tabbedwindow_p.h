@@ -7,7 +7,7 @@
 
 class TabbedWindowPrivate : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     TabbedWindowPrivate(TabbedWindow* q_ptr);
