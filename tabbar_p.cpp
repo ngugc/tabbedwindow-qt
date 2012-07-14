@@ -105,10 +105,12 @@ void TabBarPrivate::tabRemoved(int index)
 void TabBarPrivate::createNewWindow(const QPoint &pos,
                                     TabMoveEvent *event)
 {
-    // Create the new window with the same size and positioned under the cursor
+    // Create the new window with the same size and centered under the cursor
     TabbedWindow *wnd = new TabbedWindow();
-    wnd->resize(window()->size());
-    wnd->move(pos);
+    QRect geometry = window()->geometry();
+
+    geometry.moveCenter(pos);
+    wnd->setGeometry(geometry);
 
     // Move widget to the new window
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
