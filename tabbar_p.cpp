@@ -90,7 +90,11 @@ void TabBarPrivate::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
     view->removeTab(index);
 
     // Insert tab into the new window at the given cursor's position
-    wnd->insertTab(pos, page, text);
+    index = wnd->insertTab(pos, page, text);
+
+    // Set it as the current tab and move focus to the new window
+    wnd->setCurrentView(index);
+    wnd->raise();
 }
 
 

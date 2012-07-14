@@ -18,6 +18,7 @@ public:
     int addView(QWidget* view, const QString &title);
     int insertTab(const QPoint &pos, QWidget *page, const QString &text);
     void removeView(int index);
+    void setCurrentView(int index);
 
 private:
     TabbedWindowPrivate* d_ptr;

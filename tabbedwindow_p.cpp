@@ -16,6 +16,12 @@ TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 }
 
 
+void TabbedWindowPrivate::setCurrentView(int index)
+{
+    tabs->setCurrentIndex(index);
+}
+
+
 int TabbedWindowPrivate::insertView(const QPoint &pos, QWidget *page,
                                     const QString &text)
 {
