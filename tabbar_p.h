@@ -17,10 +17,10 @@ public:
     ~TabBarPrivate();
 
     void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
 
 protected:
+    void moveWindow(QWidget*, const QPoint&);
     void createNewWindow(const QPoint&, TabMoveEvent*);
     void moveToWindow(TabbedWindow*, const QPoint&, TabMoveEvent*);
     void tabRemoved(int index);

@@ -42,6 +42,12 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 }
 
 
+void TabBarPrivate::moveWindow(QWidget *window, const QPoint &pos)
+{
+    window->move(pos);
+}
+
+
 void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 {
     // Call superclass if a button different than the left one was released
@@ -51,32 +57,30 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    // If left button was released and a move action is involved
-    // process the current action
-    if (moveEvent->type() == TabMoveEvent::Dragging
-            && moveEvent->manhattan(event->globalPos()))
-    {
-        // Stop dragging
-        TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
-                    QApplication::widgetAt(event->globalPos()));
+    //
+    TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
+                QApplication::widgetAt(event->globalPos()));
 
-        // Choose action by the widget under the mouse's coordinates
-        if (w == NULL) {
+    // Choose action by the widget under the mouse's coordinates
+    if (w == NULL) {
+        if (count() == 1) {
+            // Move the current window into the new position
+            moveWindow(window(), event->globalPos());
+        } else {
             // Creates a new window with the dragged tab
             createNewWindow(event->globalPos(), moveEvent);
-
-        } else {
-            // Move the dragged tab into the window under the cursor
-            TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
-
-            if (wnd != NULL) {
-                moveToWindow(wnd, event->globalPos(), moveEvent);
-            }
         }
+    } else {
+        // Move the dragged tab into the window under the cursor
+        TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
 
-        // Reset move event
-        moveEvent = NULL;
+        if (wnd != NULL) {
+            moveToWindow(wnd, event->globalPos(), moveEvent);
+        }
     }
+
+    // Reset move event
+    moveEvent = NULL;
 }
 
 
@@ -129,19 +133,4 @@ void TabBarPrivate::createNewWindow(const QPoint &pos,
 
     // Show the new window
     wnd->show();
-}
-
-
-void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
-{
-    // No left button or no move event
-    if (!(event->buttons() & Qt::LeftButton)
-            or moveEvent == NULL
-            or moveEvent->type() != TabMoveEvent::Moving) {
-        return;
-    }
-
-    // Move the window by the delta between the current mouse position and the
-    // last one
-    window()->move(event->globalPos() - moveEvent->pos());
 }
