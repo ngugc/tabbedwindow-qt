@@ -22,8 +22,9 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed start tab move event
     if (event->button() == Qt::LeftButton) {
-        moveEvent = new TabMoveEvent(window()->pos() - event->globalPos(),
-                                     tabAt(event->pos()));
+        QPoint offset = window()->pos() - event->globalPos();
+
+        moveEvent = new TabMoveEvent(offset, tabAt(event->pos()));
     }
 
     // Call superclass
