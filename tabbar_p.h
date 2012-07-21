@@ -2,10 +2,12 @@
 #define VIEWBAR_P_H
 
 #include <QTabBar>
-#include "tabbedwindow.h"
 
 
-class TabMoveEvent;
+class GhostWindow;
+
+
+class TabbedWindow;
 
 
 class TabBarPrivate : public QTabBar
@@ -17,11 +19,12 @@ public:
     ~TabBarPrivate();
 
     void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
 
 protected:
-    void createNewWindow(const QPoint&, TabMoveEvent*);
-    void moveToWindow(TabbedWindow*, const QPoint&, TabMoveEvent*);
+    void createNewWindow(const QPoint&, GhostWindow*);
+    void moveToWindow(TabbedWindow*, const QPoint&, GhostWindow*);
     void tabRemoved(int index);
     
 signals:
@@ -29,7 +32,7 @@ signals:
 public slots:
 
 private:
-    TabMoveEvent *moveEvent;
+    GhostWindow *m_ghost;
 };
 
 #endif // VIEWBAR_P_H
