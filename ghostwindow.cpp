@@ -1,8 +1,8 @@
 #include "ghostwindow.h"
-#include "tabbar_p.h"
+#include "tabbar.h"
 
 
-GhostWindow::GhostWindow(TabBarPrivate *tabbar, const QPoint& pos) :
+GhostWindow::GhostWindow(TabBar *tabbar, const QPoint& pos) :
     QWidget()
 {
     QWidget *wnd = tabbar->window();

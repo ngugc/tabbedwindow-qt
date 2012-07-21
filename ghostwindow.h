@@ -4,7 +4,7 @@
 #include <QWidget>
 
 
-class TabBarPrivate;
+class TabBar;
 
 
 class GhostWindow : public QWidget
@@ -12,7 +12,7 @@ class GhostWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit GhostWindow(TabBarPrivate *tabbar, const QPoint& pos);
+    explicit GhostWindow(TabBar *tabbar, const QPoint& pos);
 
     const QPoint offset() { return m_offset; }
     const int index() { return m_index; }

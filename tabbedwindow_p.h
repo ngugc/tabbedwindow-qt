@@ -2,7 +2,9 @@
 #define TABBEDWINDOWPRIVATE_H
 
 #include "tabbedwindow.h"
-#include "tabview_p.h"
+
+
+class TabView;
 
 
 class TabbedWindowPrivate : public QObject
@@ -19,7 +21,7 @@ public:
 
 private:
     TabbedWindow *q_ptr;
-    TabViewPrivate* tabs;
+    TabView* tabs;
 };
 
 #endif // TABBEDWINDOWPRIVATE_H

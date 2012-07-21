@@ -1,26 +1,26 @@
 #include <QMouseEvent>
 #include <QApplication>
 
-#include "tabbar_p.h"
-#include "tabview_p.h"
+#include "tabbar.h"
+#include "tabview.h"
 #include "ghostwindow.h"
 #include "tabbedwindow.h"
 
 
-TabBarPrivate::TabBarPrivate(QWidget *parent) :
+TabBar::TabBar(QWidget *parent) :
     QTabBar(parent),
     m_ghost(NULL)
 {
 }
 
 
-TabBarPrivate::~TabBarPrivate()
+TabBar::~TabBar()
 {
     delete m_ghost;
 }
 
 
-void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
+void TabBar::mouseMoveEvent(QMouseEvent *event)
 {
     if (m_ghost) {
         m_ghost->moveWithOffset(event->globalPos());
@@ -28,7 +28,7 @@ void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
 }
 
 
-void TabBarPrivate::mousePressEvent(QMouseEvent *event)
+void TabBar::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed start tab move event
     if (event->button() == Qt::LeftButton && tabAt(event->pos()) > -1) {
@@ -41,7 +41,7 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 }
 
 
-void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
+void TabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     // Call superclass if a button different than the left one was released
     // and return
@@ -51,7 +51,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
     }
 
     //
-    TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
+    TabBar *w = dynamic_cast<TabBar*>(
                 QApplication::widgetAt(event->globalPos()));
 
     // Choose action by the widget under the mouse's coordinates
@@ -61,7 +61,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
             window()->move(m_ghost->pos());
         } else {
             // Creates a new window with the dragged tab
-            createNewWindow(event->globalPos(), m_ghost);
+            createNewWindow(m_ghost);
         }
     } else {
         // Move the dragged tab into the window under the cursor
@@ -77,11 +77,11 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 }
 
 
-void TabBarPrivate::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
+void TabBar::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
                                  GhostWindow *ghost)
 {
     // Remove view from this window
-    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+    TabView *view = static_cast<TabView*>(parent());
     int index = ghost->index();
     QString text = tabText(index);
     QWidget *page = view->widget(index);
@@ -97,7 +97,7 @@ void TabBarPrivate::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
 }
 
 
-void TabBarPrivate::tabRemoved(int index)
+void TabBar::tabRemoved(int index)
 {
     if (count() == 0) {
         window()->close();
@@ -105,7 +105,7 @@ void TabBarPrivate::tabRemoved(int index)
 }
 
 
-void TabBarPrivate::createNewWindow(const QPoint& pos, GhostWindow *ghost)
+void TabBar::createNewWindow(GhostWindow *ghost)
 {
     // Create the new window with the same size and centered under the cursor
     TabbedWindow *wnd = new TabbedWindow();
@@ -113,7 +113,7 @@ void TabBarPrivate::createNewWindow(const QPoint& pos, GhostWindow *ghost)
     wnd->setGeometry(ghost->geometry());
 
     // Move widget to the new window
-    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+    TabView *view = static_cast<TabView*>(parent());
     int index = ghost->index();
     QWidget *tab = view->widget(index);
     QString text = view->tabText(index);
