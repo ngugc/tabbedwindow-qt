@@ -14,6 +14,7 @@ GhostWindow::GhostWindow(TabBarPrivate *tabbar, const QPoint& pos) :
     this->setPalette(palette);
     this->setGeometry(wnd->geometry());
     this->setWindowOpacity(0.5);
+    this->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     m_offset = tabbar->mapToGlobal(pos) - wnd->pos();
     m_index = tabbar->tabAt(pos);
