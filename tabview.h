@@ -10,12 +10,8 @@ class TabView : public QTabWidget
 
 public:
     explicit TabView(QWidget *parent = 0);
+
     int tabAt(const QPoint &pos);
-    
-signals:
-    
-public slots:
-    
 };
 
 #endif // TABVIEW_H
