@@ -1,3 +1,6 @@
+#include <QMenuBar>
+#include <QDebug>
+
 #include "tabbedwindow_p.h"
 #include "tabview.h"
 
@@ -12,6 +15,29 @@ TabbedWindow::TabbedWindow(QWidget *parent) :
 TabbedWindow::~TabbedWindow()
 {
     delete d_ptr;
+}
+
+
+QWidget* TabbedWindow::currentView()
+{
+    return d_ptr->currentView();
+}
+
+
+QWidget* TabbedWindowPrivate::currentView()
+{
+    return tabs->currentWidget();
+}
+
+
+void TabbedWindowPrivate::onCurrentChanged(int index)
+{
+    QMainWindow *wnd = dynamic_cast<QMainWindow*>(currentView());
+
+    if (wnd) {
+        qDebug() << index << wnd->menuBar()->actions();
+        //q_ptr->setMenuBar(wnd->menuBar());
+    }
 }
 
 
@@ -50,6 +76,9 @@ TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
     // Set up main window
     this->q_ptr = q_ptr;
     this->q_ptr->setCentralWidget(tabs);
+
+    // Connect signals
+    connect(tabs, SIGNAL(currentChanged(int)), SLOT(onCurrentChanged(int)));
 }
 
 

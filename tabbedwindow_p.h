@@ -18,10 +18,14 @@ public:
     int insertView(const QPoint &pos, QWidget *page, const QString &text);
     void removeView(int index);
     void setCurrentView(int index);
+    QWidget* currentView();
 
 private:
     TabbedWindow *q_ptr;
     TabView* tabs;
+
+private slots:
+    void onCurrentChanged(int);
 };
 
 #endif // TABBEDWINDOWPRIVATE_H
