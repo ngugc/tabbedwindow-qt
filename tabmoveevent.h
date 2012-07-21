@@ -5,14 +5,13 @@
 #include <QPoint>
 
 
+class TabBarPrivate;
+
+
 class TabMoveEvent
 {
 public:
-    /* Create a new instance of a tab move event passing the tab index under
-       the mouse cursor and the position of the mouse as the offset between the
-       current position and the top left corner of the enclosing window
-    */
-    TabMoveEvent(const QPoint& offset, int index);
+    TabMoveEvent(TabBarPrivate *tabbar, const QPoint& pos);
 
     const int index() { return m_index; }
     const QPoint offset() { return m_offset; }
