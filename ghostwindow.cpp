@@ -10,8 +10,11 @@ GhostWindow::GhostWindow(TabBar *tabbar, const QPoint& pos) :
     QWidget *wnd = tabbar->window();
     QPalette palette;
 
-    palette.setBrush(this->backgroundRole(),
-                     QBrush(QPixmap::grabWidget(wnd)));
+#if QT_VERSION >= 0x050000
+    palette.setBrush(this->backgroundRole(), QBrush(wnd->grab()));
+#else
+    palette.setBrush(this->backgroundRole(), QBrush(QPixmap::grabWidget(wnd)));
+#endif
 
     this->setPalette(palette);
     this->setGeometry(wnd->geometry());
