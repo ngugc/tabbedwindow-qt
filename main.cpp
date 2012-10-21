@@ -1,4 +1,5 @@
 #include "tabbedwindow.h"
+
 #include <QApplication>
 #include <QMainWindow>
 #include <QToolBar>

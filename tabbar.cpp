@@ -1,10 +1,10 @@
-#include <QMouseEvent>
-#include <QApplication>
-
 #include "tabbar.h"
 #include "tabview.h"
 #include "ghostwindow.h"
 #include "tabbedwindow.h"
+
+#include <QMouseEvent>
+#include <QApplication>
 
 
 TabBar::TabBar(QWidget *parent) :

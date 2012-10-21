@@ -1,7 +1,7 @@
-#include <QApplication>
-
 #include "ghostwindow.h"
 #include "tabbar.h"
+
+#include <QApplication>
 
 
 GhostWindow::GhostWindow(TabBar *tabbar, const QPoint& pos) :

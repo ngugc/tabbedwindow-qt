@@ -1,7 +1,7 @@
-#include <QMenuBar>
-
 #include "tabbedwindow_p.h"
 #include "tabview.h"
+
+#include <QMenuBar>
 
 
 TabbedWindow::TabbedWindow(QWidget *parent) :
