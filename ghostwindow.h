@@ -32,16 +32,34 @@
 
 class TabBar;
 
-
+/*
+ * This widgest is a static screenshot of the original tab view.
+ *
+ * It will be created during the Drag&Drop action as a visual feedback for the
+ * user.
+ *
+ * When moving this widget on the scrren use moveWithOffest() instead of move()
+ * so the mouse cursor will maintain the corrent offset from the upper left
+ * corner of the window as when the D&D operation has started.
+ */
 class GhostWindow : public QWidget
 {
     Q_OBJECT
 
 public:
+    // Constructor accepts the reference to the tab bar widget and the position
+    // of the cursor local to the tab bar itself
     explicit GhostWindow(TabBar *tabbar, const QPoint& pos);
 
+    // Offset between the position of the cursor on the tab bar and the upper
+    // left position of the tab bar's window.
     const QPoint offset() { return m_offset; }
+
+    // Index of the original tab in the tab bar
     const int index() { return m_index; }
+
+    // Move the widget into the given position taking in accout the current
+    // offest() value
     void moveWithOffset(const QPoint&);
 
     // Return True if the difference between the position of the original
