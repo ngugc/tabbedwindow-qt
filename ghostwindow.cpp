@@ -59,7 +59,7 @@ void GhostWindow::moveWithOffset(const QPoint& pos)
 }
 
 
-bool GhostWindow::manhattanLength(const QPoint &pos)
+bool GhostWindow::dragStarted(const QPoint &pos)
 {
     return (pos - m_originPos).manhattanLength()
             >= QApplication::startDragDistance();

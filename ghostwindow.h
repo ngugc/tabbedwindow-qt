@@ -43,7 +43,11 @@ public:
     const QPoint offset() { return m_offset; }
     const int index() { return m_index; }
     void moveWithOffset(const QPoint&);
-    bool manhattanLength(const QPoint&);
+
+    // Return True if the difference between the position of the original
+    // widget and given point is greater than the
+    // QApplication::startDragDistance() value
+    bool dragStarted(const QPoint&);
 
 private:
     QPoint m_offset;

@@ -77,7 +77,7 @@ void TabBar::mouseReleaseEvent(QMouseEvent *event)
     }
 
     // Execute drag code only if far enough
-    if (m_ghost->manhattanLength(event->globalPos())) {
+    if (m_ghost->dragStarted(event->globalPos())) {
         TabBar *w = dynamic_cast<TabBar*>(
                     QApplication::widgetAt(event->globalPos()));
 
