@@ -37,7 +37,7 @@ class TabbedWindow;
 
 
 /*
- * Re-impemented the standard QTabBar widget but adds new methods to allow
+ * Re-implemented the standard QTabBar widget but adds new methods to allow
  * Drag&Drop operations outside the tab bar's window, like creating a new
  * window with a dragged view, mote a view into a different window or close the
  * current window if no more tabs are available
